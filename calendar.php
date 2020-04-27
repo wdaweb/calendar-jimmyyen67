@@ -40,7 +40,7 @@
             text-transform: uppercase;
             font-family: "Lucida Sans";
         }
-        trytrytry
+
         /* 「年」 */
         .TheDateY {
             bottom: 3%;
