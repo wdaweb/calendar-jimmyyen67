@@ -266,11 +266,7 @@
     } else {
         $YM = date('Y-m');
     }
-
-    $WeeksName = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-    // date of today
-    // date of today
-    $Today = strtotime(date('Y-m-d'));
+    
     // the first day of month
     // the first day of month
     $TimeStamp = strtotime(date($YM . '-01'));
@@ -278,6 +274,11 @@
         $YM = date('Y-m');
         $TimeStamp = strtotime($YM . '-01');
     }
+    $WeeksName = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    // date of today
+    // date of today
+    $Today = strtotime(date('Y-m-d'));
+
     // 0=Sunday, 1=Monday, 2=Tuesday...
     // 0=Sunday, 1=Monday, 2=Tuesday...
     $FirstDayWeek = date('w', $TimeStamp);
@@ -314,6 +315,7 @@
         '5-1' => '勞動節',
         '8-8' => '父親節',
         '10-10' => '雙十節',
+        '12-24' => '平安夜',
         '12-25' => '聖誕節',
         '3-8' => '婦女節',
         '3-12' => '植樹節',
@@ -321,6 +323,7 @@
         '4-5' => '清明節',
         '9-3' => '軍人節',
         '9-28' => '教師節',
+        '10-31' => '萬聖節',
         $MotherDay => '母親節'
     ];
 
