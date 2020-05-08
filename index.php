@@ -1,3 +1,6 @@
+看完建議，尚未修改
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,6 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendar</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <style>
         body {
             display: flex;
@@ -16,9 +20,10 @@
         /* 上方標題區 */
         .Loader1 {
             display: flex;
-            position: absolute;
+            /* position: absolute;   不能同時有absolute 及 relative*/
             justify-content: center;
-            align-content: center;
+            /* align-content: center; 這個是用在多行內容時的置中,而不是單行的內容*/
+            align-items: center;
             height: 20%;
             width: 50%;
             min-width: 550px;
@@ -36,13 +41,14 @@
         .TheDateY,
         .TheDateM,
         .TheDateBig {
-            position: absolute;
+            /* position: absolute;  改成個別設定*/
             text-transform: uppercase;
             font-family: "Lucida Sans";
         }
 
         /* 「年」 */
         .TheDateY {
+            position: absolute;
             bottom: 3%;
             right: 1%;
             font-size: 50px;
@@ -50,6 +56,7 @@
 
         /* 「月-英文」 */
         .TheDateM {
+            position: absolute;
             top: 5%;
             right: 1%;
             font-size: 50px;
@@ -57,9 +64,10 @@
 
         /* 「月-數字」 */
         .TheDateBig {
-            top: -35%;
+            /* top: -35%; */
             font-size: 200px;
             font-weight: bolder;
+
         }
 
         /* 上下年按鈕 */
@@ -256,8 +264,6 @@
 
 <body>
     <!-- 設定日期結構 -->
-    <!-- 設定日期結構 -->
-    <!-- 設定日期結構 -->
     <?php
     if (isset($_GET['ym'])) {
         $YM = $_GET['ym'];
@@ -266,8 +272,7 @@
     } else {
         $YM = date('Y-m');
     }
-    
-    // the first day of month
+
     // the first day of month
     $TimeStamp = strtotime(date($YM . '-01'));
     if ($TimeStamp === false) {
@@ -276,15 +281,12 @@
     }
     $WeeksName = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     // date of today
-    // date of today
     $Today = strtotime(date('Y-m-d'));
 
-    // 0=Sunday, 1=Monday, 2=Tuesday...
     // 0=Sunday, 1=Monday, 2=Tuesday...
     $FirstDayWeek = date('w', $TimeStamp);
     $FirstDayNext = date('w', strtotime('+1 month', $TimeStamp));
 
-    /* 設定日期變化 */
     /* 設定日期變化 */
     $DaysCount = date('t', $TimeStamp);
     $DaysCountPrev = date('t', strtotime('-1 month', $TimeStamp));
@@ -299,13 +301,10 @@
     $SecondSunday = date('j', strtotime('2 Sunday', $TimeStamp));
     $MotherDay = '5-' . $SecondSunday;
     /* 設定今天 */
-    /* 設定今天 */
     $TheM = date('n', $Today);
     $TheD = date('j', $Today);
     $TheY = date('Y', $Today);
 
-    // 設定節日
-    // 設定節日
     // 設定節日
     $Holiday = [
         '1-1' => '元旦',
@@ -331,8 +330,8 @@
     ?>
     <div class="Loader1">
         <div class="Select">
-            <form action="calendar.php" method="POST">
-                <select option="calendar.php" name="YearList">
+            <form action="?" method="POST">
+                <select option="index.php" name="YearList">
                     <?php
                     for ($y = $TheDateY - 500; $y <= $TheDateY + 500; $y++) {
                         if ($y == $TheDateY) {
@@ -348,7 +347,7 @@
                     ?>
                 </select>
 
-                <select action="calendar.php" name="MonthList">
+                <select action="index.php" name="MonthList">
                     <?php
                     for ($m = 1; $m <= 12; $m++) {
                         if ($m == $TheDateBig) {
@@ -377,7 +376,7 @@
             <a href="?ym=<?= $PrevYear; ?>"> <?= date('Y', strtotime($PrevYear)) ?>年&#9650;</a>
             <a href="?ym=<?= $NextYear; ?>"> <?= date('Y', strtotime($NextYear)) ?>年&#9660;</a>
         </div>
-        <div class=BackToday><a href="calendar.php">Today</a></div>
+        <div class=BackToday><a href="?">Today</a></div>
     </div>
 
     <div class="Loader2">
@@ -441,8 +440,6 @@
                     }
                 }
             }
-
-
             echo "</tr>";
             ?>
         </table>
